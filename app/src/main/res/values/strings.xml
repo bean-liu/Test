@@ -7,4 +7,6 @@
     <string name="action_search">search</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+
+    <string name="menu_toggle_sticky">Sticky Headers</string>
 </resources>

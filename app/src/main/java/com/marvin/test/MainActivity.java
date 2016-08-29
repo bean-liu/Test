@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
         initView();
 
         mGif = (GifImageView)this.findViewById(R.id.iv_gif);
@@ -114,6 +115,7 @@ public class MainActivity extends ActionBarActivity {
                 System.out.println("hello android");
             }
         });
+        */
     }
 
 
@@ -132,11 +134,12 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        /*
         if (id == R.id.action_settings) {
             Button btHello = (Button) this.findViewById(R.id.bt_hello);
             btHello.setText("hello android");
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

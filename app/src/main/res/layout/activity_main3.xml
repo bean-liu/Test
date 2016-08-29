@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.marvin.test.Main3Activity">
+
+    <com.base.view.OverScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/splash">
+
+        <!--<ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/splash" />-->
+        <!--<LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">-->
+
+            <!--<View
+                android:paddingTop="-1500px"
+                android:layout_width="match_parent"
+                android:layout_height="1500px" />-->
+
+            <TextView
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="安卓绘制系统比较复杂，网上很多文章讲得很细，但不容易抓住核心要点，其实我们只要抓到12个关键的对应关系和概念，就可以掌握清晰基本框架，对debug和性能优化都有价值。
+
+1）一个activity对应一个window，当然，没有activity耶可以有window，比如通知栏，window大家都知道，有各种属性，比如层次，位置等等
+
+2）一个window对应一个surface，surface其实就是一个对graphic buffer进行管理的对象
+
+3）surface的创建是请求surfaceflinger完成的，其实对应的是一块graphicbuffer，gpu和cp都能访问到
+
+4）window上可以有很多的view，可以是一棵view的tree，对于activity来说，顶部的view就是DecorView，activity上所有的view都对应同一个surface
+
+5）相比activity里的view，surfaceview(glsurfaceview)会有自己独立的surface，有自己独立的处理线程，与activity的surface不是同一个
+
+6）activity的view的绘制（打开硬件加速的情况下），其实就是在一个surface上的绘制，最终通过hwui这个so完成，这是在应用端进行的，不是在surfaceflinger这一侧。hwui是硬件绘制的关键库，最关键的是hwui里有一系列GPU缓存，避免在绘制的时候重新再上传图片纹理等GPU绘制相关的数据
+
+7）各个surface还有一个合成的过程，这是在surfaceflinger中完成的
+
+8）每一次activity的view的绘制和surface的合成，都是通过vsync信号触发的，vsync每16.6毫秒触发一次
+
+9）surfaceview（glsurfaceview）的绘制可以不通过vsync来同步，自己的线程独立控制节奏，但是绘制之后的surface的合成，由surfaceflinger统一进行
+
+10）应用侧的surface，无论是view还是surface view对应的，绘制完毕之后，通过eglwapbuffer的方法，将graphicbuffer queue回给surfaceflinger（surfaceflinger合成完毕之后，会上屏，之后会释放出来，让应用侧可以重新使用这些buffer）
+
+11）view做动画的时候，如果子view没有刷新，子view的ondraw可以不被触发，这是动画过程性能高效的一个关键点，以view的hardware layer缓存整体做动画即可，在view做动画的时候如果触发了子view的重新绘制，绘制效率就会降低
+
+12) 目前主流安卓手机，GPU和CPU会共享内存，GPU占用内存多了，留给CPU的就会相应减少，每个进程GPU占用的内存，也会被统计到各个进程的总内存当中，会影响到low memory killer的策略"
+                android:textSize="20sp" />
+
+        <!--</LinearLayout>-->
+
+    </com.base.view.OverScrollView>
+
+</RelativeLayout>
