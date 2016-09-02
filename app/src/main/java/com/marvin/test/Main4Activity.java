@@ -1,12 +1,9 @@
 package com.marvin.test;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
-import com.base.view.ExpandableTextView;
-
-import org.w3c.dom.Text;
 
 public class Main4Activity extends AppCompatActivity {
 
@@ -149,5 +146,12 @@ public class Main4Activity extends AppCompatActivity {
         TextView textView = (TextView) this.findViewById(R.id.text_view);
         textView.setText(yourText);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(0, R.anim.pop_down_out);
     }
 }

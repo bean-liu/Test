@@ -20,24 +20,24 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     public MySurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        init();
+    }
+
+    public void init(){
+
         mHolder = this.getHolder();
-        mHolder.setFormat(PixelFormat.RGB_565);
         mHolder.addCallback(this);
+
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Canvas canvas = mHolder.lockCanvas();
-        if(canvas == null){
-            return ;
-        }
-        drawSth(canvas);
-        mHolder.unlockCanvasAndPost(canvas);
+        drawSth();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        drawSth();
     }
 
     @Override
@@ -45,13 +45,21 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    private void drawSth(Canvas canvas){
+    private void drawSth(){
 
+        Canvas canvas = mHolder.lockCanvas();
+
+        if(canvas == null){
+            return ;
+        }
+        canvas.drawColor(Color.WHITE);
         Rect rect = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
         canvas.drawRect(rect, paint);
+
+        mHolder.unlockCanvasAndPost(canvas);
 
     }
 }
