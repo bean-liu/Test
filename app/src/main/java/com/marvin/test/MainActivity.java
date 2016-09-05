@@ -44,4 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         colorView.setColorArray(colorArray);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 }
